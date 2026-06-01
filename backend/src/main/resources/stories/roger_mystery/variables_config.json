@@ -1,0 +1,32 @@
+{
+  "variables": [
+    {
+      "name": "selfAwareness",
+      "displayName": "自我认知",
+      "min": 0,
+      "max": 100,
+      "initial": 0
+    },
+    {
+      "name": "narratorReliability",
+      "displayName": "叙述可靠性",
+      "min": 0,
+      "max": 100,
+      "initial": 100
+    },
+    {
+      "name": "poirotSuspicion",
+      "displayName": "波洛怀疑度",
+      "min": 0,
+      "max": 100,
+      "initial": 0
+    },
+    {
+      "name": "sanity",
+      "displayName": "理智值",
+      "min": 0,
+      "max": 100,
+      "initial": 100
+    }
+  ]
+}

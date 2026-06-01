@@ -1,0 +1,892 @@
+[
+  {
+    "id": "node_1_1",
+    "scene": "第一章：晚餐会，罗杰家餐厅，晚 8:00",
+    "type": "narration",
+    "publicNarrative": "那晚的晚餐气氛很压抑。罗杰刚收到一封关于弗拉尔斯太太的勒索信，显得心神不宁。",
+    "innerThoughts": "我知道那封信意味着什么。至少，我以为我知道。",
+    "interactables": [
+      {
+        "id": "dinner_letter_hint",
+        "name": "餐桌边的信封",
+        "description": "封口被撕开，纸边被罗杰反复摩挲。",
+        "actionType": "EXAMINE",
+        "hidden": false,
+        "disturbing": false,
+        "clueId": "roger_anxiety",
+        "effects": {
+          "selfAwareness": 3
+        }
+      }
+    ],
+    "choices": [
+      {
+        "id": "choice_1_1_a",
+        "text": "【询问罗杰】老朋友，你需要谈谈吗？",
+        "nextNodeId": "node_1_2",
+        "effects": {
+          "characterRelations.roger": 5,
+          "selfAwareness": 5
+        }
+      },
+      {
+        "id": "choice_1_1_b",
+        "text": "【保持沉默】只是观察众人的表情",
+        "nextNodeId": "node_1_2",
+        "effects": {
+          "selfAwareness": 8,
+          "narratorReliability": 3
+        }
+      },
+      {
+        "id": "choice_1_1_c",
+        "text": "【提前离席】我有个急诊要处理",
+        "nextNodeId": "node_1_3",
+        "effects": {
+          "narratorReliability": -5,
+          "poirotSuspicion": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "node_1_2",
+    "scene": "罗杰书房，晚 8:45",
+    "type": "interrogation",
+    "publicNarrative": "罗杰请我到书房。他说要告诉我弗拉尔斯太太的秘密，以及那个知道秘密的人。",
+    "innerThoughts": "如果他说出那个名字，一切都会失控。",
+    "interactables": [
+      {
+        "id": "letter_on_table",
+        "name": "桌上的勒索信",
+        "description": "粗糙的伪装笔迹写着：‘我知道她为什么死，也知道你付得起价钱。’",
+        "actionType": "EXAMINE",
+        "hidden": false,
+        "disturbing": false,
+        "memoryId": "memory_letter",
+        "clueId": "blackmail_letter",
+        "effects": {
+          "selfAwareness": 6
+        }
+      },
+      {
+        "id": "locked_window",
+        "name": "开着又锁好的窗户",
+        "description": "窗闩从内侧扣紧，玻璃映出两个人影。",
+        "actionType": "EXAMINE",
+        "hidden": false,
+        "disturbing": false,
+        "clueId": "locked_window"
+      },
+      {
+        "id": "letter_opener",
+        "name": "银制拆信刀",
+        "description": "刀柄上刻着罗杰名字的缩写，台灯下闪着冷光。",
+        "actionType": "EXAMINE",
+        "hidden": false,
+        "disturbing": true,
+        "memoryId": "memory_letter_opener",
+        "clueId": "letter_opener",
+        "effects": {
+          "selfAwareness": 8
+        },
+        "specialEffect": "BLOODY_FLASHBACK"
+      }
+    ],
+    "choices": [
+      {
+        "id": "choice_1_2_a",
+        "text": "【倾听秘密】告诉我一切，我能帮忙",
+        "nextNodeId": "node_1_3",
+        "effects": {
+          "selfAwareness": 10,
+          "characterRelations.roger": 5
+        },
+        "flashbackTrigger": "scream_echo_1"
+      },
+      {
+        "id": "choice_1_2_b",
+        "text": "【打断他】也许明天再说，你太激动了",
+        "nextNodeId": "node_1_3",
+        "effects": {
+          "narratorReliability": -5,
+          "poirotSuspicion": 3
+        }
+      },
+      {
+        "id": "choice_1_2_c",
+        "text": "【紧张地摸向拆信刀】那个勒索者想要什么？",
+        "nextNodeId": "node_1_3",
+        "effects": {
+          "selfAwareness": 12,
+          "sanity": -10
+        },
+        "requirements": {
+          "selfAwareness": {
+            "operator": "GTE",
+            "value": 20
+          }
+        },
+        "quickTimeEvent": true,
+        "timeLimit": 5,
+        "flashbackTrigger": "bloody_letter_opener_1"
+      }
+    ]
+  },
+  {
+    "id": "node_1_3",
+    "scene": "离开与返回，艾克罗伊德家大门，晚 9:15",
+    "type": "narration",
+    "publicNarrative": "我离开了罗杰家。在门口遇到帕克，他说罗杰吩咐不见任何人。我步行回家。",
+    "innerThoughts": "路太黑了。黑到足以藏住五分钟。",
+    "interactables": [
+      {
+        "id": "parker_shadow",
+        "name": "门厅里的帕克",
+        "description": "管家站在门边，像在等一个不该出现的人。",
+        "actionType": "EXAMINE",
+        "hidden": false,
+        "disturbing": false,
+        "clueId": "parker_saw_doctor"
+      },
+      {
+        "id": "garden_path",
+        "name": "通向窗边的小径",
+        "description": "泥土被踩平，灌木后有一处能看见书房窗帘的缝隙。",
+        "actionType": "EXAMINE",
+        "hidden": true,
+        "disturbing": false,
+        "memoryId": "memory_window",
+        "visibilityConditions": {
+          "selfAwareness": {
+            "operator": "GTE",
+            "value": 20
+          }
+        },
+        "effects": {
+          "selfAwareness": 8
+        }
+      }
+    ],
+    "choices": [
+      {
+        "id": "choice_1_3_a",
+        "text": "【直接回家】结束当晚剧情",
+        "nextNodeId": "node_2_1",
+        "effects": {
+          "narratorReliability": 5
+        }
+      },
+      {
+        "id": "choice_1_3_b",
+        "text": "【返回询问】我忘了问罗杰用药的事",
+        "nextNodeId": "node_2_1",
+        "effects": {
+          "poirotSuspicion": 8,
+          "selfAwareness": 5
+        }
+      },
+      {
+        "id": "choice_1_3_c",
+        "text": "【绕到窗边】悄悄查看书房窗户",
+        "nextNodeId": "node_2_1",
+        "effects": {
+          "selfAwareness": 15,
+          "sanity": -8
+        },
+        "requirements": {
+          "selfAwareness": {
+            "operator": "GTE",
+            "value": 20
+          }
+        },
+        "flashbackTrigger": "corpse_vision_1"
+      }
+    ]
+  },
+  {
+    "id": "node_2_1",
+    "scene": "第二章：发现尸体，罗杰书房，第二天早上",
+    "type": "investigation",
+    "publicNarrative": "帕克发现罗杰被杀。我被叫去检查。尸体坐在椅子上，背后插着银制拆信刀。",
+    "innerThoughts": "这把刀很熟悉。太熟悉了。",
+    "interactables": [
+      {
+        "id": "corpse_position",
+        "name": "尸体位置",
+        "description": "罗杰像在听某个熟人的话时突然被刺中，几乎没有防备。",
+        "actionType": "EXAMINE",
+        "hidden": false,
+        "disturbing": false,
+        "clueId": "corpse_no_defense",
+        "effects": {
+          "selfAwareness": 5
+        }
+      },
+      {
+        "id": "wound_angle",
+        "name": "伤口角度",
+        "description": "下手很准，像熟悉人体结构的人。",
+        "actionType": "EXAMINE",
+        "hidden": false,
+        "disturbing": false,
+        "clueId": "medical_precision",
+        "effects": {
+          "poirotSuspicion": 3,
+          "selfAwareness": 5
+        }
+      },
+      {
+        "id": "study_door",
+        "name": "书房门锁",
+        "description": "门从内反锁。完美的密室，除非有人知道另一条路。",
+        "actionType": "EXAMINE",
+        "hidden": false,
+        "disturbing": false,
+        "clueId": "locked_room"
+      },
+      {
+        "id": "murder_weapon",
+        "name": "凶器拆信刀",
+        "description": "银制刀柄被擦过，但凹槽里仍有微暗痕迹。",
+        "actionType": "EXAMINE",
+        "hidden": false,
+        "disturbing": true,
+        "memoryId": "memory_weapon",
+        "effects": {
+          "selfAwareness": 10
+        },
+        "specialEffect": "BLOOD_REVEAL"
+      }
+    ],
+    "choices": [
+      {
+        "id": "choice_2_1_a",
+        "text": "【专业判断】死亡时间约在九点到十点之间",
+        "nextNodeId": "node_2_2",
+        "effects": {
+          "narratorReliability": 8,
+          "poirotSuspicion": 4
+        }
+      },
+      {
+        "id": "choice_2_1_b",
+        "text": "【含糊说明】时间不好判断",
+        "nextNodeId": "node_2_2",
+        "effects": {
+          "narratorReliability": -8,
+          "poirotSuspicion": 6
+        }
+      },
+      {
+        "id": "choice_2_1_c",
+        "text": "【强调密室】凶手不可能从门离开",
+        "nextNodeId": "node_2_2",
+        "effects": {
+          "poirotSuspicion": 8,
+          "selfAwareness": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "node_2_2",
+    "scene": "波洛登场，医生诊所，当天下午",
+    "type": "record",
+    "publicNarrative": "波洛搬到了村里。弗洛拉请他调查。这个比利时小个子有着令人不安的洞察力。",
+    "innerThoughts": "他的眼睛像显微镜。我必须小心。为什么我需要小心？",
+    "choices": [
+      {
+        "id": "choice_2_2_a",
+        "text": "【如实记录】准确描述时间线",
+        "nextNodeId": "node_2_3",
+        "effects": {
+          "narratorReliability": 10,
+          "poirotSuspicion": 5
+        }
+      },
+      {
+        "id": "choice_2_2_b",
+        "text": "【模糊处理】大概是九点多，记不清了",
+        "nextNodeId": "node_2_3",
+        "effects": {
+          "narratorReliability": -5
+        }
+      },
+      {
+        "id": "choice_2_2_c",
+        "text": "【主动误导】罗杰说帕克最近行为可疑",
+        "nextNodeId": "node_2_3",
+        "effects": {
+          "narratorReliability": -15,
+          "poirotSuspicion": 10,
+          "characterRelations.parker": -10
+        }
+      }
+    ]
+  },
+  {
+    "id": "node_2_3",
+    "scene": "询问弗洛拉，艾克罗伊德家客厅",
+    "type": "interrogation",
+    "publicNarrative": "弗洛拉承认她急需用钱，案发时在花园，看到书房灯九点半还亮着。",
+    "innerThoughts": "拉尔夫太合适了。年轻、缺钱、冲动。完美的替罪羊。",
+    "choices": [
+      {
+        "id": "choice_2_3_a",
+        "text": "【表示同情】这对你来说太难了",
+        "nextNodeId": "node_2_4",
+        "effects": {
+          "characterRelations.flora": 10
+        }
+      },
+      {
+        "id": "choice_2_3_b",
+        "text": "【质疑时间线】你确定是九点半？",
+        "nextNodeId": "node_2_4",
+        "effects": {
+          "poirotSuspicion": 4,
+          "selfAwareness": 4
+        }
+      },
+      {
+        "id": "choice_2_3_c",
+        "text": "【提及拉尔夫】他昨晚在哪里？",
+        "nextNodeId": "node_2_4",
+        "effects": {
+          "characterRelations.ralph": -5,
+          "poirotSuspicion": 3
+        }
+      },
+      {
+        "id": "choice_2_3_hidden",
+        "text": "【转移怀疑】也许拉尔夫急需用钱……",
+        "nextNodeId": "node_2_4",
+        "effects": {
+          "narratorReliability": -10,
+          "poirotSuspicion": -5
+        },
+        "requirements": {
+          "selfAwareness": {
+            "operator": "GTE",
+            "value": 30
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "node_2_4",
+    "scene": "检查勒索信，波洛的临时办公室",
+    "type": "puzzle",
+    "publicNarrative": "波洛给我看勒索信片段。笔迹很粗糙，显然是伪装的。",
+    "innerThoughts": "起笔的角度。t 的横线。上帝啊，这是我的笔迹吗？",
+    "interactables": [
+      {
+        "id": "ralph_letter",
+        "name": "拉尔夫的信",
+        "description": "字迹急促但自然，不像勒索信。",
+        "actionType": "EXAMINE",
+        "hidden": false,
+        "disturbing": false,
+        "clueId": "ralph_sample"
+      },
+      {
+        "id": "parker_note",
+        "name": "管家记录",
+        "description": "整洁拘谨，与伪装笔迹不同。",
+        "actionType": "EXAMINE",
+        "hidden": false,
+        "disturbing": false,
+        "clueId": "parker_sample"
+      },
+      {
+        "id": "medical_record",
+        "name": "我的医疗记录",
+        "description": "某个 t 的横线角度与勒索信一致。",
+        "actionType": "EXAMINE",
+        "hidden": true,
+        "disturbing": false,
+        "memoryId": "memory_handwriting",
+        "visibilityConditions": {
+          "selfAwareness": {
+            "operator": "GTE",
+            "value": 20
+          }
+        },
+        "effects": {
+          "selfAwareness": 15,
+          "sanity": -10
+        }
+      }
+    ],
+    "choices": [
+      {
+        "id": "choice_2_4_a",
+        "text": "【冷静分析】伪装者可能偷用了诊所纸张",
+        "nextNodeId": "node_3_1",
+        "effects": {
+          "narratorReliability": 5,
+          "poirotSuspicion": 8
+        }
+      },
+      {
+        "id": "choice_2_4_b",
+        "text": "【回避】笔迹分析并不可靠",
+        "nextNodeId": "node_3_1",
+        "effects": {
+          "narratorReliability": -8,
+          "poirotSuspicion": 5
+        }
+      },
+      {
+        "id": "choice_2_4_c",
+        "text": "【沉默】",
+        "nextNodeId": "node_3_1",
+        "effects": {
+          "selfAwareness": 8,
+          "sanity": -5
+        }
+      }
+    ]
+  },
+  {
+    "id": "node_3_1",
+    "scene": "第三章：时间线矛盾，村民证词汇总",
+    "type": "interrogation",
+    "publicNarrative": "波洛指出，从艾克罗伊德家到我家要二十五分钟。我的时间线上少了五分钟。",
+    "innerThoughts": "那五分钟我在哪里？树篱后？小路拐角？",
+    "choices": [
+      {
+        "id": "choice_3_1_a",
+        "text": "【坚持说法】我走得快",
+        "nextNodeId": "node_3_2",
+        "effects": {
+          "narratorReliability": -10,
+          "poirotSuspicion": 8
+        }
+      },
+      {
+        "id": "choice_3_1_b",
+        "text": "【承认矛盾】也许我记错了时间",
+        "nextNodeId": "node_3_2",
+        "effects": {
+          "narratorReliability": -5,
+          "poirotSuspicion": 5,
+          "selfAwareness": 5
+        }
+      },
+      {
+        "id": "choice_3_1_c",
+        "text": "【质疑证人】杰弗里视力不好",
+        "nextNodeId": "node_3_2",
+        "effects": {
+          "narratorReliability": -15,
+          "poirotSuspicion": 6
+        }
+      }
+    ]
+  },
+  {
+    "id": "node_3_2",
+    "scene": "药箱疑云，医生诊所",
+    "type": "introspection",
+    "disturbing": true,
+    "publicNarrative": "波洛注意到我的药箱位置变了。护士说昨天药箱没动过。",
+    "innerThoughts": "橡胶手套。我为什么要用橡胶手套？",
+    "interactables": [
+      {
+        "id": "medicine_chest",
+        "name": "药箱",
+        "description": "棕色皮质药箱里有少量佛罗那，清洁剂也少了一部分。",
+        "actionType": "EXAMINE",
+        "hidden": false,
+        "disturbing": false,
+        "memoryId": "memory_medicine",
+        "clueId": "medicine_chest",
+        "effects": {
+          "selfAwareness": 8
+        }
+      },
+      {
+        "id": "rubber_gloves",
+        "name": "橡胶手套",
+        "description": "一副用过的橡胶手套在垃圾筐底部，内侧有潮湿阴影。",
+        "actionType": "EXAMINE",
+        "hidden": false,
+        "disturbing": true,
+        "memoryId": "memory_gloves",
+        "clueId": "rubber_gloves",
+        "effects": {
+          "selfAwareness": 12,
+          "sanity": -8
+        },
+        "specialEffect": "HAND_TREMOR"
+      },
+      {
+        "id": "clinic_mirror",
+        "name": "墙上的镜子",
+        "description": "镜子里的我显得苍白，嘴角却像在笑。",
+        "actionType": "EXAMINE",
+        "hidden": true,
+        "disturbing": true,
+        "memoryId": "memory_mirror",
+        "visibilityConditions": {
+          "selfAwareness": {
+            "operator": "GTE",
+            "value": 75
+          }
+        },
+        "effects": {
+          "selfAwareness": 12,
+          "sanity": -20
+        },
+        "specialEffect": "MIRROR_DISTORTION"
+      }
+    ],
+    "choices": [
+      {
+        "id": "choice_3_2_a",
+        "text": "【如实回答】是的，检查时用了",
+        "nextNodeId": "node_3_3",
+        "effects": {
+          "poirotSuspicion": 8,
+          "narratorReliability": 5
+        }
+      },
+      {
+        "id": "choice_3_2_b",
+        "text": "【撒谎】那是之前手术用的",
+        "nextNodeId": "node_3_3",
+        "effects": {
+          "narratorReliability": -12,
+          "poirotSuspicion": 10
+        },
+        "flashbackTrigger": "hand_tremor_1"
+      },
+      {
+        "id": "choice_3_2_c",
+        "text": "【转移话题】这重要吗？",
+        "nextNodeId": "node_3_3",
+        "effects": {
+          "poirotSuspicion": 12,
+          "sanity": -5
+        }
+      }
+    ]
+  },
+  {
+    "id": "node_3_3",
+    "scene": "匿名信作者，波洛揭示新线索",
+    "type": "quicktime",
+    "publicNarrative": "波洛说，勒索信用纸像医疗记录纸。村里只有诊所和医院有。",
+    "innerThoughts": "那些纸。我上周丢了一本处方笺。不，我用了最后几页。",
+    "choices": [
+      {
+        "id": "choice_3_3_a",
+        "text": "【震惊】这不可能！",
+        "nextNodeId": "node_3_4",
+        "effects": {
+          "poirotSuspicion": 6,
+          "selfAwareness": 8
+        },
+        "quickTimeEvent": true,
+        "timeLimit": 10
+      },
+      {
+        "id": "choice_3_3_b",
+        "text": "【分析】也许是从废纸篓偷的",
+        "nextNodeId": "node_3_4",
+        "effects": {
+          "poirotSuspicion": 10,
+          "narratorReliability": -5
+        },
+        "quickTimeEvent": true,
+        "timeLimit": 10
+      },
+      {
+        "id": "choice_3_3_c",
+        "text": "【沉默】",
+        "nextNodeId": "node_3_4",
+        "effects": {
+          "poirotSuspicion": 4,
+          "selfAwareness": 12,
+          "sanity": -6
+        },
+        "quickTimeEvent": true,
+        "timeLimit": 10,
+        "flashbackTrigger": "voice_whisper_1"
+      }
+    ]
+  },
+  {
+    "id": "node_3_4",
+    "scene": "梦境碎片，医生家中，夜晚",
+    "type": "memory",
+    "disturbing": true,
+    "publicNarrative": "夜里，我看见一只戴着橡胶手套的手、银色闪光、钥匙转动声，以及一句低语：对不起，老朋友。",
+    "innerThoughts": "梦境不是梦。它像被撕碎的病历，等我把碎片拼回去。",
+    "interactables": [
+      {
+        "id": "dream_glove",
+        "name": "梦中的手套",
+        "description": "橡胶紧贴手背，潮湿感顺着指缝爬上来。",
+        "actionType": "EXAMINE",
+        "hidden": false,
+        "disturbing": false,
+        "memoryId": "memory_gloves",
+        "effects": {
+          "selfAwareness": 5,
+          "sanity": -5
+        }
+      },
+      {
+        "id": "dream_key",
+        "name": "钥匙声",
+        "description": "钥匙在暗门里转动。你知道它该怎么转。",
+        "actionType": "EXAMINE",
+        "hidden": false,
+        "disturbing": false,
+        "memoryId": "memory_secret_door",
+        "effects": {
+          "selfAwareness": 8
+        }
+      },
+      {
+        "id": "dream_words",
+        "name": "低声的话语",
+        "description": "对不起，老朋友。声音是我的。",
+        "actionType": "EXAMINE",
+        "hidden": false,
+        "disturbing": false,
+        "memoryId": "memory_apology",
+        "effects": {
+          "selfAwareness": 10,
+          "sanity": -8
+        }
+      }
+    ],
+    "choices": [
+      {
+        "id": "choice_3_4_a",
+        "text": "【醒来并写下梦】",
+        "nextNodeId": "node_4_1",
+        "effects": {
+          "selfAwareness": 10,
+          "narratorReliability": 5
+        }
+      },
+      {
+        "id": "choice_3_4_b",
+        "text": "【撕掉记录】这只是噩梦",
+        "nextNodeId": "node_4_1",
+        "effects": {
+          "selfAwareness": 5,
+          "narratorReliability": -10,
+          "sanity": -5
+        }
+      }
+    ]
+  },
+  {
+    "id": "node_4_1",
+    "scene": "第四章：拉尔夫的秘密",
+    "type": "interrogation",
+    "publicNarrative": "波洛揭露拉尔夫与厄休拉秘密结婚。拉尔夫有动机，但也有不在场证明。",
+    "innerThoughts": "替罪羊开始从我手里滑走。",
+    "choices": [
+      {
+        "id": "choice_4_1_a",
+        "text": "【逻辑分析】从动机看，他最明显",
+        "nextNodeId": "node_4_2",
+        "effects": {
+          "poirotSuspicion": 6
+        }
+      },
+      {
+        "id": "choice_4_1_b",
+        "text": "【为拉尔夫辩护】他不是那种人",
+        "nextNodeId": "node_4_2",
+        "effects": {
+          "poirotSuspicion": 8,
+          "selfAwareness": 8
+        }
+      },
+      {
+        "id": "choice_4_1_c",
+        "text": "【暗示更多】也许厄休拉也有参与",
+        "nextNodeId": "node_4_2",
+        "effects": {
+          "poirotSuspicion": -4,
+          "narratorReliability": -8
+        }
+      }
+    ]
+  },
+  {
+    "id": "node_4_2",
+    "scene": "密道发现，书房重新检查",
+    "type": "investigation",
+    "publicNarrative": "波洛移动书架，后面是一扇暗门。密道通向花园工具房，也靠近我的诊所后巷。",
+    "innerThoughts": "我穿过黑暗。手里拿着钥匙。什么时候有那把钥匙的？",
+    "interactables": [
+      {
+        "id": "secret_door",
+        "name": "书架后的暗门",
+        "description": "锁孔很旧，但最近被使用过。",
+        "actionType": "EXAMINE",
+        "hidden": false,
+        "disturbing": false,
+        "memoryId": "memory_secret_door",
+        "clueId": "secret_passage",
+        "effects": {
+          "selfAwareness": 10
+        }
+      },
+      {
+        "id": "toolroom_exit",
+        "name": "工具房出口",
+        "description": "这条路能解释那缺失的五分钟。",
+        "actionType": "EXAMINE",
+        "hidden": false,
+        "disturbing": false,
+        "clueId": "toolroom_exit",
+        "effects": {
+          "poirotSuspicion": 6
+        }
+      }
+    ],
+    "choices": [
+      {
+        "id": "choice_4_2_a",
+        "text": "【否认】什么也没听到",
+        "nextNodeId": "node_4_3",
+        "effects": {
+          "narratorReliability": -8,
+          "poirotSuspicion": 8
+        }
+      },
+      {
+        "id": "choice_4_2_b",
+        "text": "【推测】也许凶手从那里进出",
+        "nextNodeId": "node_4_3",
+        "effects": {
+          "poirotSuspicion": 6
+        }
+      },
+      {
+        "id": "choice_4_2_c",
+        "text": "【突然头痛】抱歉，我不舒服",
+        "nextNodeId": "node_4_3",
+        "effects": {
+          "selfAwareness": 12,
+          "sanity": -10
+        },
+        "requirements": {
+          "selfAwareness": {
+            "operator": "GTE",
+            "value": 50
+          }
+        },
+        "flashbackTrigger": "mirror_reflection_1"
+      }
+    ]
+  },
+  {
+    "id": "node_4_3",
+    "scene": "最终询问，所有嫌疑人聚集客厅",
+    "type": "quicktime",
+    "publicNarrative": "波洛逐条指出矛盾：五分钟空白、医疗用纸、熟悉房屋布局、手套纤维。所有人的目光落在我身上。",
+    "innerThoughts": "每一个问题都像一把刀。",
+    "choices": [
+      {
+        "id": "choice_4_3_a",
+        "text": "【连续辩解】这些都只是巧合",
+        "nextNodeId": "node_4_4",
+        "effects": {
+          "narratorReliability": -20,
+          "poirotSuspicion": 20,
+          "sanity": -10
+        },
+        "quickTimeEvent": true,
+        "timeLimit": 8,
+        "flashbackTrigger": "scream_echo_1"
+      },
+      {
+        "id": "choice_4_3_b",
+        "text": "【谨慎承认】我确实遗漏了一些细节",
+        "nextNodeId": "node_4_4",
+        "effects": {
+          "poirotSuspicion": 8,
+          "selfAwareness": 12
+        },
+        "quickTimeEvent": true,
+        "timeLimit": 8
+      },
+      {
+        "id": "choice_4_3_c",
+        "text": "【沉默】",
+        "nextNodeId": "node_4_4",
+        "effects": {
+          "selfAwareness": 15,
+          "sanity": -12
+        },
+        "quickTimeEvent": true,
+        "timeLimit": 8,
+        "flashbackTrigger": "faceless_vision_1"
+      }
+    ]
+  },
+  {
+    "id": "node_4_4",
+    "scene": "最终对峙，波洛私下与医生交谈",
+    "type": "ending",
+    "publicNarrative": "波洛请我留下。他看我的眼神温和，却像已经判决。",
+    "innerThoughts": "现在只剩下一个问题：我是否愿意承认自己是谁？",
+    "choices": [
+      {
+        "id": "choice_4_4_denial",
+        "text": "【继续伪装】我不知道你在说什么",
+        "nextNodeId": "node_5_1",
+        "effects": {
+          "narratorReliability": -15,
+          "poirotSuspicion": 15
+        }
+      },
+      {
+        "id": "choice_4_4_partial",
+        "text": "【部分承认】我……可能看到了什么",
+        "nextNodeId": "node_5_1",
+        "effects": {
+          "selfAwareness": 8,
+          "poirotSuspicion": 5
+        }
+      },
+      {
+        "id": "choice_4_4_confess",
+        "text": "【崩溃坦白】是我。上帝原谅我，是我。",
+        "nextNodeId": "node_5_1",
+        "effects": {
+          "selfAwareness": 15,
+          "sanity": -20
+        },
+        "flashbackTrigger": "corpse_vision_1"
+      },
+      {
+        "id": "choice_4_4_hidden",
+        "text": "【双重人格觉醒】不是我，是‘他’做的",
+        "nextNodeId": "node_5_1",
+        "effects": {
+          "selfAwareness": 10,
+          "sanity": -30
+        },
+        "requirements": {
+          "selfAwareness": {
+            "operator": "GTE",
+            "value": 80
+          }
+        }
+      }
+    ]
+  }
+]

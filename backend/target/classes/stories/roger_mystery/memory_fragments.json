@@ -1,0 +1,168 @@
+[
+  {
+    "id": "memory_1_1",
+    "title": "晚餐的真相",
+    "content": "罗杰不知道，我是除了弗拉尔斯太太之外唯一知道她毒死丈夫的人。",
+    "type": "TRIGGERED",
+    "triggerNodeId": "node_1_2",
+    "unlockConditions": {
+      "selfAwareness": {
+        "operator": "GTE",
+        "value": 10
+      }
+    },
+    "selfAwarenessReward": 5
+  },
+  {
+    "id": "memory_letter",
+    "title": "勒索信的笔迹",
+    "content": "那个独特的 t 横线写法。上帝啊，这是我的笔迹。",
+    "type": "COLLECTIBLE",
+    "triggerNodeId": "node_1_2",
+    "unlockConditions": {
+      "interacted.letter_on_table": {
+        "operator": "EQ",
+        "boolValue": true
+      },
+      "selfAwareness": {
+        "operator": "GTE",
+        "value": 10
+      }
+    },
+    "selfAwarenessReward": 10
+  },
+  {
+    "id": "memory_letter_opener",
+    "title": "银色刀锋",
+    "content": "银制拆信刀反射灯光，然后是红色。深红色沿着刀锋滴落。",
+    "type": "HIDDEN",
+    "triggerNodeId": "node_1_2",
+    "unlockConditions": {
+      "interacted.letter_opener": {
+        "operator": "EQ",
+        "boolValue": true
+      }
+    },
+    "selfAwarenessReward": 8
+  },
+  {
+    "id": "memory_window",
+    "title": "窗帘缝隙",
+    "content": "我从窗帘缝里看到他背对着门。手套在口袋里发潮。",
+    "type": "HIDDEN",
+    "triggerNodeId": "node_2_1",
+    "unlockConditions": {
+      "interacted.garden_path": {
+        "operator": "EQ",
+        "boolValue": true
+      }
+    },
+    "selfAwarenessReward": 8
+  },
+  {
+    "id": "memory_weapon",
+    "title": "熟悉的凶器",
+    "content": "这把刀的重量我知道。它曾经在我的手里保持过异常平稳。",
+    "type": "COLLECTIBLE",
+    "triggerNodeId": "node_2_1",
+    "unlockConditions": {
+      "interacted.murder_weapon": {
+        "operator": "EQ",
+        "boolValue": true
+      }
+    },
+    "selfAwarenessReward": 8
+  },
+  {
+    "id": "memory_handwriting",
+    "title": "医疗记录纸",
+    "content": "我用了最后几页处方笺。不是丢了，是写了那封信。",
+    "type": "HIDDEN",
+    "triggerNodeId": "node_2_4",
+    "unlockConditions": {
+      "interacted.medical_record": {
+        "operator": "EQ",
+        "boolValue": true
+      }
+    },
+    "selfAwarenessReward": 12
+  },
+  {
+    "id": "memory_medicine",
+    "title": "药箱里的空位",
+    "content": "佛罗那少了，不是为了治疗。清洁剂少了，也不是为了消毒。",
+    "type": "COLLECTIBLE",
+    "triggerNodeId": "node_3_2",
+    "unlockConditions": {
+      "interacted.medicine_chest": {
+        "operator": "EQ",
+        "boolValue": true
+      }
+    },
+    "selfAwarenessReward": 8
+  },
+  {
+    "id": "memory_gloves",
+    "title": "橡胶手套的记忆",
+    "content": "我洗了三次手，但潮湿的触感仍留在皮肤里。",
+    "type": "HIDDEN",
+    "triggerNodeId": "node_3_2",
+    "unlockConditions": {
+      "interacted.rubber_gloves": {
+        "operator": "EQ",
+        "boolValue": true
+      },
+      "selfAwareness": {
+        "operator": "GTE",
+        "value": 35
+      }
+    },
+    "selfAwarenessReward": 15
+  },
+  {
+    "id": "memory_mirror",
+    "title": "镜中的陌生人",
+    "content": "镜子里的倒影在笑。不，是我在笑。",
+    "type": "HIDDEN",
+    "triggerNodeId": "node_3_2",
+    "unlockConditions": {
+      "interacted.clinic_mirror": {
+        "operator": "EQ",
+        "boolValue": true
+      },
+      "selfAwareness": {
+        "operator": "GTE",
+        "value": 75
+      }
+    },
+    "selfAwarenessReward": 10
+  },
+  {
+    "id": "memory_secret_door",
+    "title": "暗门钥匙",
+    "content": "我知道钥匙该怎么转，因为我已经转过一次。",
+    "type": "HIDDEN",
+    "triggerNodeId": "node_4_2",
+    "unlockConditions": {
+      "interacted.secret_door": {
+        "operator": "EQ",
+        "boolValue": true
+      }
+    },
+    "selfAwarenessReward": 10
+  },
+  {
+    "id": "memory_apology",
+    "title": "对不起，老朋友",
+    "content": "杀人前的低语不是梦。声音是我的。",
+    "type": "HIDDEN",
+    "triggerNodeId": "node_4_1",
+    "unlockConditions": {
+      "selfAwareness": {
+        "operator": "GTE",
+        "value": 50
+      }
+    },
+    "selfAwarenessReward": 10
+  }
+]

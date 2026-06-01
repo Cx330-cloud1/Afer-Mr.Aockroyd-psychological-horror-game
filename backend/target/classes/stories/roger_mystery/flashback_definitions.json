@@ -1,0 +1,169 @@
+{
+  "flashbacks": [
+    {
+      "id": "bloody_letter_opener_1",
+      "type": "BLOOD_STAIN",
+      "title": "刀锋的记忆",
+      "content": "银光闪过，然后是红色。深红色在木地板上蔓延。",
+      "audioPath": "/assets/audio/drip.wav",
+      "duration": 1500,
+      "sanityCost": 8,
+      "disturbing": true,
+      "unlockMemoryId": "memory_letter_opener",
+      "minSelfAwareness": 10,
+      "intensity": 7
+    },
+    {
+      "id": "corpse_vision_1",
+      "type": "CORPSE_VISION",
+      "title": "椅子上的影子",
+      "content": "椅子上有人。颈部的角度不对，完全不对。",
+      "duration": 2000,
+      "sanityCost": 12,
+      "disturbing": true,
+      "minSelfAwareness": 20,
+      "intensity": 8
+    },
+    {
+      "id": "scream_echo_1",
+      "type": "SCREAM_ECHO",
+      "title": "寂静中的尖叫",
+      "content": "一声短促的惊呼像被掐断，随后只剩钟摆。",
+      "audioPath": "/assets/audio/scream_muffled.wav",
+      "duration": 1000,
+      "sanityCost": 6,
+      "disturbing": true,
+      "minSelfAwareness": 15,
+      "intensity": 6
+    },
+    {
+      "id": "hand_tremor_1",
+      "type": "HAND_TREMOR",
+      "title": "颤抖的双手",
+      "content": "笔握不稳，墨水在纸上晕开，像血迹。",
+      "duration": 1200,
+      "sanityCost": 5,
+      "disturbing": false,
+      "minSelfAwareness": 10,
+      "intensity": 5
+    },
+    {
+      "id": "mirror_reflection_1",
+      "type": "MIRROR_REFLECTION",
+      "title": "镜中的陌生人",
+      "content": "倒影在看着我。他在笑。不，是我在笑。",
+      "duration": 1800,
+      "sanityCost": 15,
+      "disturbing": true,
+      "unlockMemoryId": "memory_mirror",
+      "minSelfAwareness": 50,
+      "intensity": 9
+    },
+    {
+      "id": "faceless_vision_1",
+      "type": "FACELESS_VISION",
+      "title": "无面的访客",
+      "content": "门口站着一个人。没有脸，只剩模糊的轮廓。",
+      "duration": 2200,
+      "sanityCost": 18,
+      "disturbing": true,
+      "minSelfAwareness": 60,
+      "intensity": 9
+    },
+    {
+      "id": "voice_whisper_1",
+      "type": "VOICE_WHISPER",
+      "title": "另一个声音",
+      "content": "不是我。不是我。不是我。可声音越来越像我。",
+      "duration": 1400,
+      "sanityCost": 8,
+      "disturbing": true,
+      "minSelfAwareness": 30,
+      "intensity": 7
+    }
+  ],
+  "triggers": [
+    {
+      "id": "trigger_letter_opener",
+      "type": "ITEM_INTERACTED",
+      "targetNodeId": "node_1_2",
+      "targetInteractableId": "letter_opener",
+      "flashbackId": "bloody_letter_opener_1",
+      "intensity": 7
+    },
+    {
+      "id": "trigger_weapon",
+      "type": "ITEM_INTERACTED",
+      "targetNodeId": "node_2_1",
+      "targetInteractableId": "murder_weapon",
+      "flashbackId": "bloody_letter_opener_1",
+      "intensity": 8
+    },
+    {
+      "id": "trigger_gloves",
+      "type": "ITEM_INTERACTED",
+      "targetNodeId": "node_3_2",
+      "targetInteractableId": "rubber_gloves",
+      "conditions": {
+        "selfAwareness": {
+          "operator": "GTE",
+          "value": 35
+        }
+      },
+      "flashbackId": "hand_tremor_1",
+      "intensity": 7
+    },
+    {
+      "id": "trigger_mirror",
+      "type": "ITEM_INTERACTED",
+      "targetNodeId": "node_3_2",
+      "targetInteractableId": "clinic_mirror",
+      "conditions": {
+        "selfAwareness": {
+          "operator": "GTE",
+          "value": 75
+        }
+      },
+      "flashbackId": "mirror_reflection_1",
+      "intensity": 10
+    },
+    {
+      "id": "trigger_doctor_lie",
+      "type": "CHOICE_SELECTED",
+      "targetNodeId": "node_3_2",
+      "targetChoiceId": "choice_3_2_b",
+      "conditions": {
+        "selfAwareness": {
+          "operator": "GT",
+          "value": 30
+        }
+      },
+      "flashbackId": "hand_tremor_1",
+      "intensity": 5
+    },
+    {
+      "id": "trigger_poirot_pressure",
+      "type": "VARIABLE_THRESHOLD",
+      "conditions": {
+        "poirotSuspicion": {
+          "operator": "GT",
+          "value": 70
+        },
+        "sanity": {
+          "operator": "LT",
+          "value": 60
+        }
+      },
+      "flashbackId": "scream_echo_1",
+      "intensity": 8
+    },
+    {
+      "id": "trigger_final_confrontation",
+      "type": "CHOICE_SELECTED",
+      "targetNodeId": "node_4_4",
+      "targetChoiceId": "choice_4_4_confess",
+      "flashbackId": "corpse_vision_1",
+      "intensity": 10
+    }
+  ]
+}
